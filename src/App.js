@@ -1,57 +1,77 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React, { useState, useEffect, useCallback } from "react";
 
+import { useDispatch, useSelector } from "react-redux";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+
+
+
+import "./index.css";
+
+import LoginPage from "./features/account/Login";
+
+import { PublicLayout } from "./app/components/PublicLayout";
+import { PrivateLayout } from "./app/components/PrivateLayout";
+import AdminContainer from "./features/admin/AdminContainer";
+
+import ClientContainer from "./features/client/ClientContainer";
+import ClinicianContainer from "./features/clinician/ClinicianContainer";
+import EventContainer from "./features/events/eventContainer";
+import { List as AdminList } from "./features/admin/List";
+import { List as ClinicianList } from "./features/clinician/List";
+import { List as ClientList } from "./features/client/List";
+import { Details } from "./features/admin/Details";
+import { Details as ClinicianDetails} from "./features/clinician/Details";
+import { Details as ClientDetails} from "./features/client/Details";
+import { Create } from "./features/admin/Create";
+import {Create as CreateClient} from "./features/client/Create";
+import {Create as CreateClinician} from "./features/clinician/Create";
+import { Edit } from "./features/admin/Edit";
+import {Edit as EditClient} from "./features/client/Edit"
+import {Edit as EditClinician} from "./features/clinician/Edit";
+import {Calendar} from "./features/events/calendar";
+import {CreateAppoinment} from "./features/events/createAppoinment"
+import Error from "./app/components/Error";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<PublicLayout />}>
+          <Route index element={<LoginPage />} />
+        </Route>
+        <Route element={<PrivateLayout />}>
+          <Route path="/admin" element={<AdminContainer />}>
+            <Route index element={<AdminList />} />
+
+            <Route path="details/:id" element={<Details />} />
+            <Route path="create" element={<Create />} />
+            <Route path="edit/:id" element={<Edit />} />
+          </Route>
+          <Route path="/client" element={<ClientContainer />}>
+              <Route index element={<ClientList />} />
+
+            <Route path="details/:id" element={<ClientDetails />} />
+            <Route path="create" element={<CreateClient />} />
+            <Route path="edit/:id" element={<EditClient />} />
+          </Route>
+          <Route path="/clinician" element={<ClinicianContainer />}>
+            <Route index element={<ClinicianList />} />
+
+            <Route path="details/:id" element={<ClinicianDetails />} />
+            <Route path="create" element={<CreateClinician />} />
+            <Route path="edit/:id" element={<EditClinician />} />
+          </Route>
+          
+          <Route path="/events" element={<EventContainer />}>
+             <Route index element={<Calendar />} />
+           <Route path="createAppoinment" element={<CreateAppoinment />} />
+      
+         </Route>
+        </Route>
+        
+        <Route path="*" element={<Error />} />
+
+      </Routes>
+    </Router>
   );
 }
 
