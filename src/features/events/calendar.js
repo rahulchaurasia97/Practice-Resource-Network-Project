@@ -8,14 +8,14 @@ import { getAllEventsThunk } from "./getAllEventsSlice";
 
 export const Calendar = () => {
   const dispatch = useDispatch();
-  const { events, status, loading } = useSelector(
-    (store) => store.getAllEvents
-  );
-  console.log(events);
+  // const { events, status, loading } = useSelector(
+  //   (store) => store.getAllEvents
+  // );
+  //console.log(events);
   useEffect(() => {
     dispatch(getAllEventsThunk());
   }, []);
-  // const eventss = [];
+  const eventss = [];
   //console.log(eventss);
   return (
     <>
@@ -29,7 +29,7 @@ export const Calendar = () => {
         <FullCalendar
           defaultView="dayGridMonth"
           plugins={[dayGridPlugin]}
-          events={events.length ? events : null}
+          events={eventss.length ? eventss : null}
         />
       </div>
     </>

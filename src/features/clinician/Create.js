@@ -84,22 +84,7 @@ export const Create = () => {
       state: "",
       zipCode: "",
     },
-    locations: [
-      {
-        id: 0,
-        name: "",
-        code: "",
-        address: {
-          id: 0,
-          address1: "",
-          address2: "",
-          city: "",
-          state: "",
-          deleteFlag: true,
-          zipCode: "",
-        },
-      },
-    ],
+    locations: [],
     locationsNotAcceptingNewPatients: [],
     specialities: [],
     insurances: [],
@@ -137,7 +122,7 @@ export const Create = () => {
         <h2>New Clinician Details</h2>
         <Formik
           initialValues={initialValues}
-          validationSchema={validationSchema}
+          //  validationSchema={validationSchema}
           onSubmit={handleCreatingAdmin}
           //validate={(data, error) => console.log(data, error)}
         >

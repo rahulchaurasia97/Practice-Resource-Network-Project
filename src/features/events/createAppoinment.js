@@ -15,8 +15,8 @@ export const CreateAppoinment = () => {
 
   const initialValues = {
     description: "",
-    startDt: "",
-    endDt: "",
+    startDt: "2022-05-31T12:20:49.390Z",
+    endDt: "2022-05-31T12:20:49.390Z",
     timezone: "America/New_York",
     recurringFlag: true,
     recurringEndDt: "2022-05-24T06:33:44.720Z",
@@ -79,9 +79,9 @@ export const CreateAppoinment = () => {
         <h2>Create New Appoinment</h2>
         <Formik
           initialValues={initialValues}
-          //   validationSchema={validationSchema}
+          //validationSchema={validationSchema}
           onSubmit={handleCreatingAppoinment}
-          //validate={(data, error) => console.log(data, error)}
+          validate={(data, error) => console.log(data, error)}
         >
           <Form>
             <div className="form-group">
@@ -112,7 +112,7 @@ export const CreateAppoinment = () => {
             <div className="form-group">
               <label htmlFor="last">State</label>
               <Field
-                name="address.state"
+                name="location.address.state"
                 type="text"
                 className="form-control"
               />
